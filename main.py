@@ -49,6 +49,8 @@ def is_correct_brackets(brackets_str, brackets_dict=BRACKET_DICT):
         if bracket in brackets_dict:
             bracket_stack.push(bracket)
         elif bracket in brackets_dict.values():
+            if bracket_stack.is_empty():
+                return
             open_bracket = get_key(bracket)
             if open_bracket == bracket_stack.peek():
                 bracket_stack.pop()
@@ -60,8 +62,8 @@ def is_correct_brackets(brackets_str, brackets_dict=BRACKET_DICT):
     return True
 
 if __name__ == '__main__':
-    brackets = '(((([{}]))))'
-    if is_correct_brackets(brackets):
+    brackets = ''
+    if is_correct_brackets(brackets) and brackets:
         print('Сбалансированно')
     else:
         print('Несбалансированно')
